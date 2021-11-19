@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} UI Tables {% endblock %} 
+{% block title %} Bills {% endblock %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -15,12 +15,12 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Bootstrap Basic Tables</h5>
+                            <h5 class="m-b-10">All Bills</h5>
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#!">Tables</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:">Basic Tables</a></li>
+                            <li class="breadcrumb-item"><a href="#!">All Bills</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Bills</a></li>
                         </ul>
                     </div>
                 </div>
@@ -30,140 +30,72 @@
         <div class="main-body">
             <div class="page-wrapper">
                 <!-- [ Main Content ] start -->
+                {% for bill in all_Bills %}
+                {% if bill.username  == request.user.username%}
                 <div class="row">
-                    <!-- [ basic-table ] start -->
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Basic Table</h5>
-                                <span class="d-block m-t-5">use class <code>table</code> inside table element</span>
+                                <h5>{{ bill.Shop_name }} </h5>
                             </div>
-                            <div class="card-block table-border-style">
+                             <div class="card-header">
+                                <h6 style="font-size:14px;">{{ bill.Shop_address }} </h6>
+                            </div>
+                            <div class="card-header">
+                                <h6 style="font-size:14px;"> Phn : {{ bill.Telephone_no }} </h6>
+                            </div>
+                             <div class="card-header">
+                                <h6 style="font-size:12px;">{{ bill.Date }} </h6>
+                            </div>
+                            <div class="card-header">
+                                <h6 style="font-size:12px;">Total Items : {{ bill.Total_items }} </h6>
+                            </div>
+                            <div>
+                                <img src={{bill.Bill_picture.url}} alt="Smiley face" width="250" height="250">
+                            </div>
+
+
+                                <div class="card-block table-border-style">
                                 <div class="table-responsive">
                                     <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Username</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@twitter</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- [ basic-table ] end -->
 
-                    <!-- [ Hover-table ] start -->
-                    <div class="col-xl-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Hover Table</h5>
-                                <span class="d-block m-t-5">use class <code>table-hover</code> inside table element</span>
-                            </div>
-                            <div class="card-block table-border-style">
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Username</th>
-                                            </tr>
-                                        </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@twitter</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- [ Hover-table ] end -->
+                                        <tr>
+                                        <th>Name</th>
+                                            <th>Price</th>
+                                            <th>Warrenty (Years)</th>
+                                        </tr>
+                                                {% for item in all_Items %}
+                                                {% if item.bill == bill%}
+                                                <tr>
+                                                <td > {{ item.Item_name }} </td>
+                                                <td > {{ item.Item_price }} </td>
+                                                <td > {{ item.Item_warrenty_years }} </td>
 
-                    <!-- [ stiped-table ] start -->
-                    <div class="col-xl-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Striped Table</h5>
-                                <span class="d-block m-t-5">use class <code>table-striped</code> inside table element</span>
-                            </div>
-                            <div class="card-block table-border-style">
-                                <div class="table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Username</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@twitter</td>
-                                            </tr>
+                                                </tr>
+                                                {% endif %}
+                                                {% endfor %}
+
+                                        <tr>
+                                            <th>Total </th>
+                                            <th>{{bill.Bill_amount}}</th>
+                                        </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+
+                            </div>
+
                         </div>
                     </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+
+
+
                     <!-- [ stiped-table ] end -->
                 </div>
                 <!-- [ Main Content ] end -->

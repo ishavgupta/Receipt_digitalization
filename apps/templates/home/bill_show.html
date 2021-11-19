@@ -15,12 +15,10 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h5 class="m-b-10">Sample Page</h5>
+                                <h5 class="m-b-10"> Bill Show</h5>
                             </div>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#!">All Bills</a></li>
-                                <li class="breadcrumb-item"><a href="javascript:">Add</a></li>
+
                             </ul>
                         </div>
                     </div>
@@ -30,12 +28,7 @@
             <div class="main-body">
                 <div class="page-wrapper">
                     <!-- [ Main Content ] start -->
-
-                                    <form method = "post" enctype="multipart/form-data">
-		{% csrf_token %}
-		{{ form.as_p }}
-		<button type="submit">Upload</button>
-	</form>
+    <img src="{{bill.Bill_picture.url}}" alt="Smiley face" width="250" height="250">
 
                     <!-- [ Main Content ] end -->
                 </div>

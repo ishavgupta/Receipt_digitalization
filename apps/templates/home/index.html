@@ -20,7 +20,7 @@
                         <div class="col-md-6 col-xl-4">
                             <div class="card daily-sales">
                                 <div class="card-block">
-                                    <h6 class="mb-4">Daily Sales</h6>
+                                    <h6 class="mb-4">Daily Expenditure</h6>
                                     <div class="row d-flex align-items-center">
                                         <div class="col-9">
                                             <h3 class="f-w-300 d-flex align-items-center m-b-0"><i class="feather icon-arrow-up text-c-green f-30 m-r-10"></i>$ 249.95</h3>
@@ -41,7 +41,7 @@
                         <div class="col-md-6 col-xl-4">
                             <div class="card Monthly-sales">
                                 <div class="card-block">
-                                    <h6 class="mb-4">Monthly Sales</h6>
+                                    <h6 class="mb-4">Monthly Expenditure</h6>
                                     <div class="row d-flex align-items-center">
                                         <div class="col-9">
                                             <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="feather icon-arrow-down text-c-red f-30 m-r-10"></i>$ 2.942.32</h3>
@@ -61,7 +61,7 @@
                         <div class="col-md-12 col-xl-4">
                             <div class="card yearly-sales">
                                 <div class="card-block">
-                                    <h6 class="mb-4">Yearly Sales</h6>
+                                    <h6 class="mb-4">Yearly Expenditure</h6>
                                     <div class="row d-flex align-items-center">
                                         <div class="col-9">
                                             <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="feather icon-arrow-up text-c-green f-30 m-r-10"></i>$ 8.638.32</h3>
@@ -81,67 +81,27 @@
                         <div class="col-xl-8 col-md-6">
                             <div class="card Recent-Users">
                                 <div class="card-header">
-                                    <h5>Recent Users</h5>
+                                    <h5>Recent Bills</h5>
                                 </div>
                                 <div class="card-block px-0 py-3">
                                     <div class="table-responsive">
                                         <table class="table table-hover">
                                             <tbody>
+                                                {% for bill in all_Bills %}
+                                                {% if bill.username  == request.user.username%}
                                                 <tr class="unread">
                                                     <td><img class="rounded-circle" style="width:40px;" src="/static/assets/images/user/avatar-1.jpg" alt="activity-user"></td>
                                                     <td>
-                                                        <h6 class="mb-1">Isabella Christensen</h6>
-                                                        <p class="m-0">Lorem Ipsum is simply…</p>
+                                                        <h6 class="mb-1">{{bill.Shop_name}}</h6>
+                                                        <p class="m-0"> Items: {{bill.Total_items}} Rs. {{bill.Bill_amount}}</p>
                                                     </td>
                                                     <td>
-                                                        <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>11 MAY 12:56</h6>
+                                                        <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{bill.Date}}</h6>
                                                     </td>
-                                                    <td><a href="#!" class="label theme-bg2 text-white f-12">Reject</a><a href="#!" class="label theme-bg text-white f-12">Approve</a></td>
+                                                    <td><a href="#!" class="label theme-bg2 text-white f-12">Remove</a><a href="/ui-tables.html" class="label theme-bg text-white f-12">View</a></td>
                                                 </tr>
-                                                <tr class="unread">
-                                                    <td><img class="rounded-circle" style="width:40px;" src="/static/assets/images/user/avatar-2.jpg" alt="activity-user"></td>
-                                                    <td>
-                                                        <h6 class="mb-1">Mathilde Andersen</h6>
-                                                        <p class="m-0">Lorem Ipsum is simply text of…</p>
-                                                    </td>
-                                                    <td>
-                                                        <h6 class="text-muted"><i class="fas fa-circle text-c-red f-10 m-r-15"></i>11 MAY 10:35</h6>
-                                                    </td>
-                                                    <td><a href="#!" class="label theme-bg2 text-white f-12">Reject</a><a href="#!" class="label theme-bg text-white f-12">Approve</a></td>
-                                                </tr>
-                                                <tr class="unread">
-                                                    <td><img class="rounded-circle" style="width:40px;" src="/static/assets/images/user/avatar-3.jpg" alt="activity-user"></td>
-                                                    <td>
-                                                        <h6 class="mb-1">Karla Sorensen</h6>
-                                                        <p class="m-0">Lorem Ipsum is simply…</p>
-                                                    </td>
-                                                    <td>
-                                                        <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>9 MAY 17:38</h6>
-                                                    </td>
-                                                    <td><a href="#!" class="label theme-bg2 text-white f-12">Reject</a><a href="#!" class="label theme-bg text-white f-12">Approve</a></td>
-                                                </tr>
-                                                <tr class="unread">
-                                                    <td><img class="rounded-circle" style="width:40px;" src="/static/assets/images/user/avatar-1.jpg" alt="activity-user"></td>
-                                                    <td>
-                                                        <h6 class="mb-1">Ida Jorgensen</h6>
-                                                        <p class="m-0">Lorem Ipsum is simply text of…</p>
-                                                    </td>
-                                                    <td>
-                                                        <h6 class="text-muted f-w-300"><i class="fas fa-circle text-c-red f-10 m-r-15"></i>19 MAY 12:56</h6>
-                                                    </td>
-                                                    <td><a href="#!" class="label theme-bg2 text-white f-12">Reject</a><a href="#!" class="label theme-bg text-white f-12">Approve</a></td>
-                                                </tr>
-                                                <tr class="unread">
-                                                    <td><img class="rounded-circle" style="width:40px;" src="/static/assets/images/user/avatar-2.jpg" alt="activity-user"></td>
-                                                    <td>
-                                                        <h6 class="mb-1">Albert Andersen</h6>
-                                                        <p class="m-0">Lorem Ipsum is simply dummy…</p>
-                                                    </td>
-                                                    <td>
-                                                        <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>21 July 12:56</h6>
-                                                    </td>
-                                                    <td><a href="#!" class="label theme-bg2 text-white f-12">Reject</a><a href="#!" class="label theme-bg text-white f-12">Approve</a></td>
-                                                </tr>
+                                                {% endif %}
+                                                {% endfor %}
                                             </tbody>
                                         </table>
                                     </div>
@@ -150,7 +110,8 @@
                         </div>
                         <!--[ Recent Users ] end-->
 
-                        <!-- [ statistics year chart ] start -->
+                        <!-- [ statistics year chart ] start --
+
                         <div class="col-xl-4 col-md-6">
                             <div class="card card-event">
                                 <div class="card-block">
@@ -288,62 +249,6 @@
                             </div>
                         </div>
                         <!--[social-media section] end-->
-                        <!-- [ rating list ] starts-->
-                        <div class="col-xl-4 col-md-6">
-                            <div class="card user-list">
-                                <div class="card-header">
-                                    <h5>Rating</h5>
-                                </div>
-                                <div class="card-block">
-                                    <div class="row align-items-center justify-content-center m-b-20">
-                                        <div class="col-6">
-                                            <h2 class="f-w-300 d-flex align-items-center float-left m-0">4.7 <i class="fas fa-star f-10 m-l-10 text-c-yellow"></i></h2>
-                                        </div>
-                                        <div class="col-6">
-                                            <h6 class="d-flex  align-items-center float-right m-0">0.4 <i class="fas fa-caret-up text-c-green f-22 m-l-10"></i></h6>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xl-12">
-                                            <h6 class="align-items-center float-left"><i class="fas fa-star f-10 m-r-10 text-c-yellow"></i>5</h6>
-                                            <h6 class="align-items-center float-right">384</h6>
-                                            <div class="progress m-t-30 m-b-20" style="height: 6px;">
-                                                <div class="progress-bar progress-c-theme" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-12">
-                                            <h6 class="align-items-center float-left"><i class="fas fa-star f-10 m-r-10 text-c-yellow"></i>4</h6>
-                                            <h6 class="align-items-center float-right">145</h6>
-                                            <div class="progress m-t-30  m-b-20" style="height: 6px;">
-                                                <div class="progress-bar progress-c-theme" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-12">
-                                            <h6 class="align-items-center float-left"><i class="fas fa-star f-10 m-r-10 text-c-yellow"></i>3</h6>
-                                            <h6 class="align-items-center float-right">24</h6>
-                                            <div class="progress m-t-30  m-b-20" style="height: 6px;">
-                                                <div class="progress-bar progress-c-theme" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-12">
-                                            <h6 class="align-items-center float-left"><i class="fas fa-star f-10 m-r-10 text-c-yellow"></i>2</h6>
-                                            <h6 class="align-items-center float-right">1</h6>
-                                            <div class="progress m-t-30  m-b-20" style="height: 6px;">
-                                                <div class="progress-bar progress-c-theme" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-12">
-                                            <h6 class="align-items-center float-left"><i class="fas fa-star f-10 m-r-10 text-c-yellow"></i>1</h6>
-                                            <h6 class="align-items-center float-right">0</h6>
-                                            <div class="progress m-t-30  m-b-20" style="height: 6px;">
-                                                <div class="progress-bar" role="progressbar" style="width:0;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- [ rating list ] end-->
                         <div class="col-xl-8 col-md-12 m-b-30">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
@@ -588,8 +493,67 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- [ rating list ] starts-->
+                        <div class="col-xl-4 col-md-6">
+                            <div class="card user-list">
+                                <div class="card-header">
+                                    <h5>Rating</h5>
+                                </div>
+                                <div class="card-block">
+                                    <div class="row align-items-center justify-content-center m-b-20">
+                                        <div class="col-6">
+                                            <h2 class="f-w-300 d-flex align-items-center float-left m-0">4.7 <i class="fas fa-star f-10 m-l-10 text-c-yellow"></i></h2>
+                                        </div>
+                                        <div class="col-6">
+                                            <h6 class="d-flex  align-items-center float-right m-0">0.4 <i class="fas fa-caret-up text-c-green f-22 m-l-10"></i></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <h6 class="align-items-center float-left"><i class="fas fa-star f-10 m-r-10 text-c-yellow"></i>5</h6>
+                                            <h6 class="align-items-center float-right">384</h6>
+                                            <div class="progress m-t-30 m-b-20" style="height: 6px;">
+                                                <div class="progress-bar progress-c-theme" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-12">
+                                            <h6 class="align-items-center float-left"><i class="fas fa-star f-10 m-r-10 text-c-yellow"></i>4</h6>
+                                            <h6 class="align-items-center float-right">145</h6>
+                                            <div class="progress m-t-30  m-b-20" style="height: 6px;">
+                                                <div class="progress-bar progress-c-theme" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-12">
+                                            <h6 class="align-items-center float-left"><i class="fas fa-star f-10 m-r-10 text-c-yellow"></i>3</h6>
+                                            <h6 class="align-items-center float-right">24</h6>
+                                            <div class="progress m-t-30  m-b-20" style="height: 6px;">
+                                                <div class="progress-bar progress-c-theme" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-12">
+                                            <h6 class="align-items-center float-left"><i class="fas fa-star f-10 m-r-10 text-c-yellow"></i>2</h6>
+                                            <h6 class="align-items-center float-right">1</h6>
+                                            <div class="progress m-t-30  m-b-20" style="height: 6px;">
+                                                <div class="progress-bar progress-c-theme" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-12">
+                                            <h6 class="align-items-center float-left"><i class="fas fa-star f-10 m-r-10 text-c-yellow"></i>1</h6>
+                                            <h6 class="align-items-center float-right">0</h6>
+                                            <div class="progress m-t-30  m-b-20" style="height: 6px;">
+                                                <div class="progress-bar" role="progressbar" style="width:0;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- [ rating list ] end-->
+
+
 
                     </div>
+
                     <!-- [ Main Content ] end -->
                 </div>
             </div>
