@@ -20,10 +20,10 @@ class Bill(models.Model):
     Shop_address = models.CharField(max_length=250,  null=True, blank=True)
     Telephone_no = models.CharField(max_length=250,null=True, blank=True)
     Total_items = models.IntegerField( null=True, blank=True)
-    Bill_amount = models.IntegerField( null=True, blank=True)
+    Bill_amount = models.FloatField( null=True, blank=True)
     Bill_picture = models.ImageField(upload_to='')
     def __str__(self):
-        return self.Shop_name
+        return self.username
 
 
 #    Bill_no = models.IntegerField(max_length=1000)

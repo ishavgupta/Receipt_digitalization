@@ -12,6 +12,7 @@ from .models import Bill
 from .models import Item
 import requests
 import json
+import time
 from django.shortcuts import render, redirect
 from .forms import *
 #from apps.authentication import forms
@@ -56,8 +57,50 @@ def bill_image_view(request):
             instance=form.save(commit= False)
             instance.username=request.user.username
 
-            instance.save
+            instance.save()
+            LabelFile = ""
+            IMG_PATH = instance.Bill_picture.path
+            url = 'https://app.nanonets.com/api/v2/OCR/Model/' + model_id + '/LabelFile/?async=true'
 
+            data = {'file': open(IMG_PATH, 'rb')}
+
+            response = requests.post(url, auth=requests.auth.HTTPBasicAuth(API_KEY, ''), files=data)
+            js = json.loads(response.text)
+            image_id = 0
+            for i in js['result']:
+                image_id = (i['id'])
+            url = f'https://app.nanonets.com/api/v2/Inferences/Model/{model_id}/ImageLevelInferences/{image_id}'
+            response = requests.request('GET', url, auth=requests.auth.HTTPBasicAuth(API_KEY, ''))
+            js = json.loads(response.text)
+
+            while(js['message']=="Image is being processed. Please try again later"):
+                time.sleep(1)
+                response = requests.request('GET', url, auth=requests.auth.HTTPBasicAuth(API_KEY, ''))
+                js = json.loads(response.text)
+
+
+
+            print(js)
+
+            if(instance.Shop_name== None or instance.Shop_name== 0):
+                print("Lol")
+                for i in js['result'][0]['prediction']:
+                    if i['label'] == "seller_name":
+                        instance.Shop_name = i['ocr_text']
+            if(instance.Shop_address== None):
+                for i in js['result'][0]['prediction']:
+                    if i['label'] == "seller_address":
+                        instance.Shop_address = i['ocr_text']
+
+            if(instance.Telephone_no== None):
+                for i in js['result'][0]['prediction']:
+                    if i['label'] == "seller_phone":
+                        instance.Telephone_no = i['ocr_text']
+
+            if (instance.Bill_amount == None):
+                for i in js['result'][0]['prediction']:
+                    if i['label'] == "invoice_amount":
+                        instance.Bill_amount = float(i['ocr_text'])
 
             instance.save()
             img_obj = form.instance
