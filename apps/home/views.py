@@ -71,7 +71,7 @@ def bill_image_view(request):
             instance.username=request.user.username
 
             instance.save()
-            LabelFile = """
+            LabelFile = ""
             IMG_PATH = instance.Bill_picture.path
             url = 'https://app.nanonets.com/api/v2/OCR/Model/' + model_id + '/LabelFile/?async=true'
 
@@ -114,7 +114,7 @@ def bill_image_view(request):
                 for i in js['result'][0]['prediction']:
                     if i['label'] == "invoice_amount":
                         instance.Bill_amount = float(i['ocr_text'])
-            """
+
             instance.save()
             img_obj = form.instance
 
