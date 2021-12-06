@@ -93,12 +93,12 @@
                                                     <td><img class="rounded-circle" style="width:40px;" src="/static/assets/images/user/avatar-1.jpg" alt="activity-user"></td>
                                                     <td>
                                                         <h6 class="mb-1">{{bill.Shop_name}}</h6>
-                                                        <p class="m-0"> Items: {{bill.Total_items}} Rs. {{bill.Bill_amount}}</p>
+                                                        <p class="m-0"> Rs. {{bill.Bill_amount}}</p>
                                                     </td>
                                                     <td>
                                                         <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{bill.Date}}</h6>
                                                     </td>
-                                                    <td><a href="#!" class="label theme-bg2 text-white f-12">Remove</a><a href="/ui-tables.html" class="label theme-bg text-white f-12">View</a></td>
+                                                    <td><a href="" class="label theme-bg2 text-white f-12">Remove</a><a href="{{bill.Bill_picture.url}}" class="label theme-bg text-white f-12">View</a></td>
                                                 </tr>
                                                 {% endif %}
                                                 {% endfor %}

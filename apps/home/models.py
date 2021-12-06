@@ -19,7 +19,7 @@ class Bill(models.Model):
     Date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     Shop_address = models.CharField(max_length=250,  null=True, blank=True)
     Telephone_no = models.CharField(max_length=250,null=True, blank=True)
-    Total_items = models.IntegerField( null=True, blank=True)
+    Total_items = models.IntegerField( null=True, blank=True, default=1)
     Bill_amount = models.FloatField( null=True, blank=True)
     Bill_picture = models.ImageField(upload_to='')
     def __str__(self):
