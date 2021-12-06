@@ -51,7 +51,7 @@
                                 <h6 style="font-size:12px;">Total Items : {{ bill.Total_items }} </h6>
                             </div>
                             <div>
-                                <img src={{bill.Bill_picture.url}} alt="Smiley face" width="250" height="250">
+                                <img src="{{bill.Bill_picture.url}}" alt="Smiley face" width="250" height="250" class = "center">
                             </div>
 
 
@@ -90,10 +90,10 @@
 
                         </div>
                     </div>
-                </div>
                 {% endif %}
                 {% endfor %}
 
+                </div>
 
 
                     <!-- [ stiped-table ] end -->
@@ -101,8 +101,7 @@
                 <!-- [ Main Content ] end -->
             </div>
         </div>
-    </div>
-</div>
+
 
 {% endblock content %}
 

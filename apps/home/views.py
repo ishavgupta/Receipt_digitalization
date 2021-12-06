@@ -10,10 +10,21 @@ from django.template import loader
 from django.urls import reverse
 from .models import Bill
 from .models import Item
+import requests
+import json
 from django.shortcuts import render, redirect
 from .forms import *
 #from apps.authentication import forms
 from django.contrib.auth.models import User
+
+
+#Nanonets
+API_KEY = "geEnRk2-LXvy6-WhzgQjNzQu0YO-6iE7"
+model_id = "ca58d7f9-770c-44a8-83fa-f45f8815e668"
+url0 = 'https://app.nanonets.com/api/v2/OCR/Model/' + model_id
+
+
+
 
 
 
@@ -31,7 +42,7 @@ def index(request):
 @login_required(login_url="/login/")
 def bill_image_view(request):
 
-    all_Bills = Bill.objects.all()
+    all_Bills = Bill.objects.filter(username=request.user.username)
 
     context1 = {'segment': 'index',
                'all_Bills': all_Bills,
@@ -42,12 +53,21 @@ def bill_image_view(request):
         form = BillForm(request.POST, request.FILES)
 
         if form.is_valid():
-            form.save()
+            instance=form.save(commit= False)
+            instance.username=request.user.username
+
+            instance.save
+
+
+            instance.save()
             img_obj = form.instance
+
             return render(request, 'home/page-blank.html', {'form': form, 'img_obj': img_obj,'segment': 'bill_image_view' })
 
     else:
         form = BillForm()
+        print("jj")
+        form.username = request.user.username
     return render(request, 'home/page-blank.html', {'form': form, 'segment': 'bill_image_view'})
     #return HttpResponse(html_template.render({'form': form}, request))
 

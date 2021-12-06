@@ -6,7 +6,7 @@ $(document).ready(function() {
         element: 'morris-bar-chart',
         data: [{
                 y: '2008',
-                a: 50,
+                a: 60,
                 b: 40,
                 c: 35,
             },
@@ -51,7 +51,7 @@ $(document).ready(function() {
         element: 'morris-bar-stacked-chart',
         data: [{
                 y: '2008',
-                a: 50,
+                a: 60,
                 b: 40,
                 c: 35,
             },

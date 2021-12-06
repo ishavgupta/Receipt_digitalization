@@ -5,6 +5,7 @@ Copyright (c) 2019 - present AppSeed.us
 
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 
 # Create your models here.
@@ -13,15 +14,14 @@ from django.contrib.auth.models import User
 
 
 class Bill(models.Model):
-    #user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    username = models.CharField(max_length=250, default = 0)
-    Shop_name = models.CharField(max_length=250, default=0)
-    Date = models.DateTimeField(auto_now_add=True)
-    Shop_address = models.CharField(max_length=250, default=0)
-    Telephone_no = models.CharField(max_length=250, default=0)
-    Total_items = models.IntegerField(default=0)
-    Bill_amount = models.IntegerField(default=0)
-    Bill_picture = models.ImageField(upload_to='images/')
+    username = models.CharField(max_length=250, null=True, blank=True)
+    Shop_name = models.CharField(max_length=250, null=True, blank=True)
+    Date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    Shop_address = models.CharField(max_length=250,  null=True, blank=True)
+    Telephone_no = models.CharField(max_length=250,null=True, blank=True)
+    Total_items = models.IntegerField( null=True, blank=True)
+    Bill_amount = models.IntegerField( null=True, blank=True)
+    Bill_picture = models.ImageField(upload_to='')
     def __str__(self):
         return self.Shop_name
 
