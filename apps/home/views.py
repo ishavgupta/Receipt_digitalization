@@ -40,6 +40,19 @@ def index(request):
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
 
+
+@login_required(login_url="/login/")
+def delete_bill(request, pk):
+    bill = Bill.objects.get(id=pk)
+    if request.method == 'POST':  # If method is POST,
+        bill.delete()  # delete the cat.
+        return redirect('/')  # Finally, redirect to the homepage.
+
+    return render(request, 'page-blank.html', {'bill': bill})
+
+
+
+
 @login_required(login_url="/login/")
 def bill_image_view(request):
 
@@ -58,7 +71,7 @@ def bill_image_view(request):
             instance.username=request.user.username
 
             instance.save()
-            LabelFile = ""
+            LabelFile = """
             IMG_PATH = instance.Bill_picture.path
             url = 'https://app.nanonets.com/api/v2/OCR/Model/' + model_id + '/LabelFile/?async=true'
 
@@ -101,7 +114,7 @@ def bill_image_view(request):
                 for i in js['result'][0]['prediction']:
                     if i['label'] == "invoice_amount":
                         instance.Bill_amount = float(i['ocr_text'])
-
+            """
             instance.save()
             img_obj = form.instance
 

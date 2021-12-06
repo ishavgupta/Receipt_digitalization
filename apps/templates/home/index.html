@@ -87,8 +87,10 @@
                                     <div class="table-responsive">
                                         <table class="table table-hover">
                                             <tbody>
+
                                                 {% for bill in all_Bills %}
                                                 {% if bill.username  == request.user.username%}
+
                                                 <tr class="unread">
                                                     <td><img class="rounded-circle" style="width:40px;" src="/static/assets/images/user/avatar-1.jpg" alt="activity-user"></td>
                                                     <td>
@@ -98,7 +100,10 @@
                                                     <td>
                                                         <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{bill.Date}}</h6>
                                                     </td>
-                                                    <td><a href="" class="label theme-bg2 text-white f-12">Remove</a><a href="{{bill.Bill_picture.url}}" class="label theme-bg text-white f-12">View</a></td>
+                                                        <td><form action="{% url 'delete_bill' bill.id %}" method="post">
+    {% csrf_token %}
+    <input  class="label theme-bg2 text-white f-12" type="submit" value="Delete" height="4" width="4">
+</form><a href="{{bill.Bill_picture.url}}" class="label theme-bg text-white f-12">View</a></td>
                                                 </tr>
                                                 {% endif %}
                                                 {% endfor %}
@@ -154,7 +159,7 @@
                             </div>
                         </div>
                         <!-- [ statistics year chart ] end -->
-                        <!--[social-media section] start-->
+                        <!--[social-media section] start--
                         <div class="col-md-12 col-xl-4">
                             <div class="card card-social">
                                 <div class="card-block border-bottom">
@@ -264,236 +269,80 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
                                     <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>User</th>
-                                                <th>Activity</th>
-                                                <th>Time</th>
-                                                <th>Status</th>
-                                                <th class="text-right"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="/static/assets/images/user/avatar-1.jpg" alt="activity-user">Ida Jorgensen</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">The quick brown fox</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">3:28 PM</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0 text-c-green">Done</h6>
-                                                </td>
-                                                <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="/static/assets/images/user/avatar-2.jpg" alt="activity-user">Albert Andersen</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">Jumps over the lazy</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">2:37 PM</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0 text-c-red">Missed</h6>
-                                                </td>
-                                                <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="/static/assets/images/user/avatar-3.jpg" alt="activity-user">Silje Larsen</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">Dog the quick brown</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">10:23 AM</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0 text-c-purple">Delayed</h6>
-                                                </td>
-                                                <td class="text-right"><i class="fas fa-circle text-c-purple f-10"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="/static/assets/images/user/avatar-1.jpg" alt="activity-user">Ida Jorgensen</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">The quick brown fox</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">4:28 PM</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0 text-c-green">Done</h6>
-                                                </td>
-                                                <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                            <tbody>
+                                                {% for bill in all_Bills %}
+                                                {% if bill.username  == request.user.username %}
+                                                <tr class="unread">
+                                                    <td><img class="rounded-circle" style="width:40px;" src="/static/assets/images/user/avatar-1.jpg" alt="activity-user"></td>
+                                                    <td>
+                                                        <h6 class="mb-1">{{bill.Shop_name}}</h6>
+                                                        <p class="m-0"> Rs. {{bill.Bill_amount}}</p>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{bill.Date}}</h6>
+                                                    </td>
+                                                        <td><form action="{% url 'delete_bill' bill.id %}" method="post">
+    {% csrf_token %}
+    <input  class="label theme-bg2 text-white f-12" type="submit" value="Delete" height="4" width="4">
+</form><a href="{{bill.Bill_picture.url}}" class="label theme-bg text-white f-12">View</a></td>
+                                                </tr>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
 
                                 </div>
                                 <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>User</th>
-                                                <th>Activity</th>
-                                                <th>Time</th>
-                                                <th>Status</th>
-                                                <th class="text-right"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="/static/assets/images/user/avatar-2.jpg" alt="activity-user">Albert Andersen</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">Jumps over the lazy</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">2:37 PM</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0 text-c-red">Missed</h6>
-                                                </td>
-                                                <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="/static/assets/images/user/avatar-1.jpg" alt="activity-user">Ida Jorgensen</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">The quick brown fox</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">3:28 PM</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0 text-c-green">Done</h6>
-                                                </td>
-                                                <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="/static/assets/images/user/avatar-1.jpg" alt="activity-user">Ida Jorgensen</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">The quick brown fox</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">4:28 PM</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0 text-c-green">Done</h6>
-                                                </td>
-                                                <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="/static/assets/images/user/avatar-3.jpg" alt="activity-user">Silje Larsen</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">Dog the quick brown</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">10:23 AM</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0 text-c-purple">Delayed</h6>
-                                                </td>
-                                                <td class="text-right"><i class="fas fa-circle text-c-purple f-10"></i></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
+                                   <table class="table table-hover">
+                                            <tbody>
+                                                {% for bill in all_Bills %}
+                                                {% if bill.username  == request.user.username %}
+                                                <tr class="unread">
+                                                    <td><img class="rounded-circle" style="width:40px;" src="/static/assets/images/user/avatar-1.jpg" alt="activity-user"></td>
+                                                    <td>
+                                                        <h6 class="mb-1">{{bill.Shop_name}}</h6>
+                                                        <p class="m-0"> Rs. {{bill.Bill_amount}}</p>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{bill.Date}}</h6>
+                                                    </td>
+                                                        <td><form action="{% url 'delete_bill' bill.id %}" method="post">
+    {% csrf_token %}
+    <input  class="label theme-bg2 text-white f-12" type="submit" value="Delete" height="4" width="4">
+</form><a href="{{bill.Bill_picture.url}}" class="label theme-bg text-white f-12">View</a></td>
+                                                </tr>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
                                 </div>
                                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>User</th>
-                                                <th>Activity</th>
-                                                <th>Time</th>
-                                                <th>Status</th>
-                                                <th class="text-right"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="/static/assets/images/user/avatar-3.jpg" alt="activity-user">Silje Larsen</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">Dog the quick brown</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">10:23 AM</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0 text-c-purple">Delayed</h6>
-                                                </td>
-                                                <td class="text-right"><i class="fas fa-circle text-c-purple f-10"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h6 class="m-0"><img class="rounded-circle m-r-10" style="width:40px;" src="/static/assets/images/user/avatar-1.jpg" alt="activity-user">Ida Jorgensen</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">The quick brown fox</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">3:28 PM</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0 text-c-green">Done</h6>
-                                                </td>
-                                                <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="/static/assets/images/user/avatar-2.jpg" alt="activity-user">Albert Andersen</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">Jumps over the lazy</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">2:37 PM</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0 text-c-red">Missed</h6>
-                                                </td>
-                                                <td class="text-right"><i class="fas fa-circle text-c-red f-10"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h6 class="m-0"><img class="rounded-circle  m-r-10" style="width:40px;" src="/static/assets/images/user/avatar-1.jpg" alt="activity-user">Ida Jorgensen</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">The quick brown fox</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0">4:28 PM</h6>
-                                                </td>
-                                                <td>
-                                                    <h6 class="m-0 text-c-green">Done</h6>
-                                                </td>
-                                                <td class="text-right"><i class="fas fa-circle text-c-green f-10"></i></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                   <table class="table table-hover">
+                                            <tbody>
+                                                {% for bill in all_Bills %}
+                                                {% if bill.username  == request.user.username %}
+                                                <tr class="unread">
+                                                    <td><img class="rounded-circle" style="width:40px;" src="/static/assets/images/user/avatar-1.jpg" alt="activity-user"></td>
+                                                    <td>
+                                                        <h6 class="mb-1">{{bill.Shop_name}}</h6>
+                                                        <p class="m-0"> Rs. {{bill.Bill_amount}}</p>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{bill.Date}}</h6>
+                                                    </td>
+                                                        <td><form action="{% url 'delete_bill' bill.id %}" method="post">
+    {% csrf_token %}
+    <input  class="label theme-bg2 text-white f-12" type="submit" value="Delete" height="4" width="4">
+</form><a href="{{bill.Bill_picture.url}}" class="label theme-bg text-white f-12">View</a></td>
+                                                </tr>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
                                 </div>
                             </div>
                         </div>
-                        <!-- [ rating list ] starts-->
+                        <!-- [ rating list ] starts--
                         <div class="col-xl-4 col-md-6">
                             <div class="card user-list">
                                 <div class="card-header">
