@@ -48,7 +48,7 @@ def delete_bill(request, pk):
         bill.delete()  # delete the cat.
         return redirect('/')  # Finally, redirect to the homepage.
 
-    return render(request, 'page-blank.html', {'bill': bill})
+    return render(request, 'add-bill.html', {'bill': bill})
 
 
 
@@ -118,13 +118,13 @@ def bill_image_view(request):
             instance.save()
             img_obj = form.instance
 
-            return render(request, 'home/page-blank.html', {'form': form, 'img_obj': img_obj,'segment': 'bill_image_view' })
+            return render(request, 'home/add-bill.html', {'form': form, 'img_obj': img_obj,'segment': 'bill_image_view' })
 
     else:
         form = BillForm()
         print("jj")
         form.username = request.user.username
-    return render(request, 'home/page-blank.html', {'form': form, 'segment': 'bill_image_view'})
+    return render(request, 'home/add-bill.html', {'form': form, 'segment': 'bill_image_view'})
     #return HttpResponse(html_template.render({'form': form}, request))
 
 
