@@ -31,7 +31,7 @@
                 <div class="page-wrapper">
                     <!-- [ Main Content ] start -->
 
-                                    <form method = "post" enctype="multipart/form-data">
+                                    <form method = "post" enctype="multipart/form-data" class="form-horizontal">
 		{% csrf_token %}
 		{{ form.as_p }}
 		<button type="submit">Upload</button>

@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^delete/(?P<pk>[0-9]+)/$', views.delete_bill, name='delete_bill'),
 
     path('bill_image_view', views.bill_image_view, name='bill_image_view'),
+    path('result', views.result, name='result'),
     # Matches any html file
     re_path(r'^.*\.html', views.pages, name='pages'),
 

@@ -17,15 +17,43 @@
                         <div class="page-header-title">
                             <h5 class="m-b-10">All Bills</h5>
                         </div>
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#!">All Bills</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:">Bills</a></li>
-                        </ul>
+
+                                                <!-- <div class=""> -->
+                            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                                <!-- <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                                </a> -->
+
+                                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                                    <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="#!">All Bills</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:">Bills</a></li>
+                                </ul>
+
+
+
+                                <form class="col-12 col-lg-auto mb-3 mb-lg-2 me-lg-2 br", action="{% url 'result' %}", method="get">
+                                    <input type="search" class="form-control" placeholder="Search..." aria-label="Search", name="search_query">
+                                </form>
+
+                            </div>
+                         <!-- <div class=""> -->
+                            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                                <!-- <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                                </a> -->
+
+
+
+
+                            </div>
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>
         </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
         <!-- [ breadcrumb ] end -->
         <div class="main-body">
             <div class="page-wrapper">
@@ -50,8 +78,8 @@
                             <div class="card-header">
                                 <h6 style="font-size:12px;">Total Items : {{ bill.Total_items }} </h6>
                             </div>
-                            <div>
-                                <img src="{{bill.Bill_picture.url}}" alt="Smiley face" width="250" height="250" class = "center">
+                            <div class = "container ">
+                                <img src="{{bill.Bill_picture.url}}" alt="Bill img" width="350" height="350" class = "rounded">
                             </div>
 
 

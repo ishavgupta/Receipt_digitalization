@@ -13,6 +13,8 @@ from .models import Item
 import requests
 import json
 import time
+from django.db.models import Q
+
 from django.shortcuts import render, redirect
 from .forms import *
 #from apps.authentication import forms
@@ -39,6 +41,7 @@ def index(request):
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
+
 
 
 @login_required(login_url="/login/")
@@ -130,12 +133,36 @@ def bill_image_view(request):
 
 
 
-
 @login_required(login_url="/login/")
-def success(request):
-    return HttpResponse('successfully uploaded')
+def result(request):
+    query = request.GET.get('search_query')
+    all_Bills = Bill.objects.filter(Q(Shop_name__icontains=query) | Q(Shop_address__icontains=query) | Q(Telephone_no__icontains=query) | Q(Bill_amount__icontains=query)   )
 
+    all_Items = Item.objects.all()
+    context = {
+        'all_Bills': all_Bills,
+        'all_Items': all_Items,
+    }
 
+    try:
+
+        load_template = 'ui-tables.html'
+
+        if load_template == 'admin':
+            return HttpResponseRedirect(reverse('admin:index'))
+        context['segment'] = load_template
+
+        html_template = loader.get_template('home/' + load_template)
+        return HttpResponse(html_template.render(context, request))
+
+    except template.TemplateDoesNotExist:
+
+        html_template = loader.get_template('home/page-404.html')
+        return HttpResponse(html_template.render(context, request))
+
+    except:
+        html_template = loader.get_template('home/page-500.html')
+        return HttpResponse(html_template.render(context, request))
 
 
 @login_required(login_url="/login/")
